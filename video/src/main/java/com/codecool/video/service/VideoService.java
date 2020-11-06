@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class VideoService {
@@ -19,5 +20,10 @@ public class VideoService {
 
     public void saveVideo(Video video) {
         videoRepository.save(video);
+    }
+
+    public Video getVideoById(String videoId) {
+        Optional<Video> video = videoRepository.findById(Long.parseLong(videoId));
+        return video.orElse(null);
     }
 }

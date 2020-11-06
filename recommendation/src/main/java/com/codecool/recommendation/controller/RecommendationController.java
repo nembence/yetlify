@@ -14,9 +14,9 @@ public class RecommendationController {
     @Autowired
     private RecommendationService service;
 
-    @GetMapping("/get-all")
-    public List<Recommendation> getAllRecommendations() {
-        return service.getAllRecommendation();
+    @GetMapping("/get-all/{videoId}")
+    public List<Recommendation> getAllRecommendations(@PathVariable("videoId") String videoId) {
+        return service.getAllRecommendations(videoId);
     }
 
     @PostMapping("/new")
