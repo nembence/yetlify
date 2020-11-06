@@ -19,8 +19,8 @@ public class VideoController {
         return videoService.getAllVideos();
     }
 
-    @PostMapping("/new-video")
-    public void updateNewVideo(@RequestBody Video video) {
+    @PostMapping("/new")
+    public void saveVideo(@RequestBody Video video) {
         videoService.saveVideo(video);
     }
 }
