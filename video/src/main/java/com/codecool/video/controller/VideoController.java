@@ -11,6 +11,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 public class VideoController {
 
     @Autowired
@@ -44,6 +45,7 @@ public class VideoController {
     }
 
     @PostMapping("/new-recommendation")
+    @CrossOrigin
     public void saveRecommendation(@RequestBody Recommendation recommendation) {
         String uri = baseUrl + "/new";
         restTemplate.postForEntity(uri,recommendation,Recommendation.class);
