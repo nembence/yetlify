@@ -14,18 +14,20 @@ const VideoDetail = (props) => {
     useEffect(() => {
         const page = props.match.params.id;
         setId(page);
-        fetchVideo(page);
-        fetchRecommendations(page);
+        fetchVideo();
+        fetchRecommendations();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const fetchVideo = (id) => {
+    const fetchVideo = () => {
+        const id = props.match.params.id;
         axios.get(url.get_video + id).then((response) => {
             setVideo(response.data);
         });
     };
 
-    const fetchRecommendations = (id) => {
+    const fetchRecommendations = () => {
+        const id = props.match.params.id;
         axios.get(url.get_recommendations + id).then((response) => {
             renderRecommendations(response.data);
         });
@@ -47,7 +49,10 @@ const VideoDetail = (props) => {
                 </Header>
                 {recommendations}
             </Comment.Group>
-            <RecInput id={id} />
+            <RecInput
+                id={id}
+                fetchRecommendations={() => fetchRecommendations()}
+            />
         </div>
     );
 };
