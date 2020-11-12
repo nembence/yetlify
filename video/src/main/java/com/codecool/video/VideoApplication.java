@@ -68,7 +68,17 @@ public class VideoApplication {
 					.url("https://www.youtube.com/watch?v=3Rz-iXgQCcw")
 					.build();
 
-			repository.saveAll(List.of(video1, video2, video3, video4));
+			Video video5 = Video.builder()
+					.name("The beauty of data visualization")
+					.url("https://www.youtube.com/watch?v=5Zg-C8AAIGg")
+					.build();
+
+			Video video6 = Video.builder()
+					.name("Vansire | Best Of")
+					.url("https://www.youtube.com/watch?v=3BgnLMQWV0g")
+					.build();
+
+			repository.saveAll(List.of(video1, video2, video3, video4, video5, video6));
 		};
 	}
 }
