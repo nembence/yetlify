@@ -17,7 +17,7 @@ import javax.persistence.*;
 public class Recommendation {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @Column(nullable = false)
