@@ -3,9 +3,16 @@ import { Button, Form, Segment } from "semantic-ui-react";
 import url from "../../utility/url";
 import axios from "axios";
 
-const RecInput = (id) => {
+const RecInput = ({ id, fetchRecommendations }) => {
     const [comment, setComment] = useState("");
     const [rating, setRating] = useState("");
+
+    const inputContainer = {
+        width: "60%",
+        position: "absolute",
+        left: "15%",
+        margin: "auto",
+    };
 
     const changeComment = (event) => {
         setComment(event.target.value);
@@ -19,14 +26,19 @@ const RecInput = (id) => {
         const recommendation = {
             comment: comment,
             rating: rating,
-            videoId: id.id,
+            videoId: id,
         };
-        console.log(recommendation);
         axios.post(url.new_recommendation, recommendation);
+        Array.from(document.querySelectorAll("input")).forEach(
+            (input) => (input.value = "")
+        );
+        setTimeout(() => {
+            fetchRecommendations();
+        }, 200);
     };
 
     return (
-        <Form size="small">
+        <Form size="small" style={inputContainer}>
             <Segment stacked>
                 <Form.Input
                     fluid
