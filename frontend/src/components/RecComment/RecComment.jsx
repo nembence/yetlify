@@ -8,7 +8,7 @@ const RecComment = (data) => {
     return (
         <Comment key={data.id}>
             <Comment.Content>
-                <Comment.Avatar src="https://react.semantic-ui.com/images/avatar/small/joe.jpg" />
+                <Comment.Avatar src="https://react.semantic-ui.com/images/avatar/small/steve.jpg" />
                 <Comment.Metadata>
                     <div>Rating: {data.data.rating}</div>
                 </Comment.Metadata>

@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import Loading from "../Loading/Loading";
-import Name from "../Name/Name";
+import Video from "../Video/Video";
 import url from "../../utility/url";
 import { Grid } from "semantic-ui-react";
+import VideoInput from "../VideoInput/VideoInput";
+import { VideoContext } from "../../context/VideoContext";
 
 const Main = () => {
     const [status, setStatus] = useState("");
-    const [names, setNames] = useState([]);
+    const [videos, setVideos] = useContext(VideoContext);
 
     useEffect(() => {
         setStatus("loading");
@@ -16,22 +18,23 @@ const Main = () => {
     }, []);
 
     const fetchData = () => {
+        console.log("a");
         axios
             .get(url.get_all)
             .then((response) => {
                 setStatus("loaded");
-                renderNames(response.data);
+                renderVideos(response.data);
             })
             .catch((error) => {
                 setStatus("error");
             });
     };
 
-    const renderNames = (fetchedData) => {
+    const renderVideos = (fetchedData) => {
         const rendered = fetchedData.map((data) => (
-            <Name key={data.id} name={data.name} id={data.id} />
+            <Video key={data.id} name={data.name} id={data.id} url={data.url} />
         ));
-        setNames(rendered);
+        setVideos(rendered);
     };
 
     return (
@@ -39,9 +42,12 @@ const Main = () => {
             {status === "error" && <div>Error.</div>}
             {status === "loading" && <Loading />}
             {status === "loaded" && (
-                <Grid relaxed columns={4}>
-                    {names}
-                </Grid>
+                <React.Fragment>
+                    <Grid relaxed columns={3}>
+                        {videos}
+                    </Grid>
+                    <VideoInput fetchData={() => fetchData()} />
+                </React.Fragment>
             )}
         </div>
     );
